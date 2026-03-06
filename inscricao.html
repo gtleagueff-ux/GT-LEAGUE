@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Inscrição</title>
+
+<style>
+
+body{
+background:#111;
+color:white;
+font-family:Arial;
+text-align:center;
+}
+
+input{
+padding:10px;
+margin:5px;
+width:250px;
+}
+
+button{
+padding:10px;
+margin:10px;
+cursor:pointer;
+}
+
+.slot{
+background:#222;
+padding:8px;
+margin:4px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>INSCRIÇÃO</h1>
+
+<p id="info"></p>
+
+<input id="nick" placeholder="Nick"><br>
+<input id="whats" placeholder="WhatsApp"><br>
+<input id="pix" placeholder="PIX"><br>
+
+<button onclick="entrar()">Confirmar</button>
+
+<h2>Slots</h2>
+
+<div id="slots"></div>
+
+<script>
+
+let modo = localStorage.getItem("modo")
+let hora = localStorage.getItem("hora")
+
+document.getElementById("info").innerText =
+modo.toUpperCase()+" "+hora+"h"
+
+let players = JSON.parse(localStorage.getItem("players")) || []
+
+function entrar(){
+
+let nick = document.getElementById("nick").value
+let whats = document.getElementById("whats").value
+let pix = document.getElementById("pix").value
+
+if(nick=="") return
+
+let slot = players.length+1
+
+let p = {
+nick,
+whats,
+pix,
+slot,
+kills:0,
+pos:0
+}
+
+players.push(p)
+
+localStorage.setItem("players",JSON.stringify(players))
+
+mostrar()
+
+}
+
+function mostrar(){
+
+let area = document.getElementById("slots")
+
+area.innerHTML=""
+
+players.forEach(p=>{
+
+area.innerHTML += `
+<div class="slot">
+Slot ${p.slot} - ${p.nick}
+</div>
+`
+
+})
+
+}
+
+mostrar()
+
+</script>
+
+</body>
+</html>
