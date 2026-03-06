@@ -2,99 +2,36 @@
 <html>
 <head>
 <title>GT League</title>
+
 <style>
+
 body{
-font-family: Arial;
+font-family:Arial;
 background:#0f0f0f;
 color:white;
 text-align:center;
 }
 
-.container{
-max-width:600px;
-margin:auto;
-padding:20px;
-}
-
-input,button{
-padding:10px;
-margin:5px;
-width:80%;
-border-radius:8px;
-border:none;
-}
-
 button{
-background:#ffd000;
-font-weight:bold;
+padding:15px;
+margin:10px;
+font-size:18px;
 cursor:pointer;
 }
 
-.slot{
-background:#1e1e1e;
-margin:5px;
-padding:10px;
-border-radius:6px;
-}
 </style>
+
 </head>
 
 <body>
 
-<div class="container">
-
 <h1>🏆 GT LEAGUE</h1>
-<p>Inscrição do Diário</p>
 
-<input id="nick" placeholder="Digite seu nick">
+<h2>Escolha o modo</h2>
 
-<button onclick="entrar()">Entrar na partida</button>
-
-<h2>Slots</h2>
-
-<div id="slots"></div>
-
-</div>
-
-<script>
-
-let players=[]
-
-function entrar(){
-
-let nick=document.getElementById("nick").value
-
-if(nick==""){
-alert("Digite seu nick")
-return
-}
-
-if(players.length>=48){
-alert("Sala cheia")
-return
-}
-
-players.push(nick)
-
-mostrar()
-
-}
-
-function mostrar(){
-
-let area=document.getElementById("slots")
-
-area.innerHTML=""
-
-players.forEach((p,i)=>{
-
-area.innerHTML+=`<div class="slot">Slot ${i+1} - ${p}</div>`
-
-})
-
-}
-
-</script>
+<button onclick="location.href='diario.html'">
+DIÁRIO
+</button>
 
 </body>
 </html>
