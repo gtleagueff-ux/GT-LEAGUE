@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>GT League Diário</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#111;
+color:white;
+text-align:center;
+}
+
+button{
+padding:15px;
+margin:10px;
+font-size:16px;
+cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>DIÁRIO</h1>
+
+<h2>Escolha o modo</h2>
+
+<button onclick="modo('solo')">SOLO</button>
+<button onclick="modo('duo')">DUO</button>
+
+<h2>Horários</h2>
+
+<div id="horarios"></div>
+
+<script>
+
+let modoSelecionado = ""
+
+function modo(m){
+
+modoSelecionado = m
+
+}
+
+let horas = ["19","20","21","22","23","00","01"]
+
+let div = document.getElementById("horarios")
+
+horas.forEach(h=>{
+
+div.innerHTML += `
+<button onclick="entrar('${h}')">
+${h}h
+</button>
+`
+
+})
+
+function entrar(h){
+
+if(modoSelecionado==""){
+alert("Escolha SOLO ou DUO")
+return
+}
+
+localStorage.setItem("modo",modoSelecionado)
+localStorage.setItem("hora",h)
+
+location.href="inscricao.html"
+
+}
+
+</script>
+
+</body>
+</html>
