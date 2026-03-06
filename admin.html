@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Admin</title>
+
+<style>
+
+body{
+background:#111;
+color:white;
+font-family:Arial;
+text-align:center;
+}
+
+input{
+width:60px;
+margin:5px;
+}
+
+table{
+margin:auto;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>PAINEL ADM</h1>
+
+Valor por Kill
+<input id="killvalor" value="2.5"><br>
+
+1º
+<input id="p1" value="25">
+
+2º
+<input id="p2" value="15">
+
+3º
+<input id="p3" value="10">
+
+<br><br>
+
+<table id="tabela"></table>
+
+<button onclick="calcular()">Calcular Premiação</button>
+
+<div id="resultado"></div>
+
+<script>
+
+let players = JSON.parse(localStorage.getItem("players")) || []
+
+let tabela = document.getElementById("tabela")
+
+players.forEach((p,i)=>{
+
+tabela.innerHTML += `
+<tr>
+<td>${p.nick}</td>
+<td>Kills <input id="k${i}"></td>
+<td>Pos <input id="p${i}"></td>
+</tr>
+`
+
+})
+
+function calcular(){
+
+let killvalor = Number(document.getElementById("killvalor").value)
+
+let p1 = Number(document.getElementById("p1").value)
+let p2 = Number(document.getElementById("p2").value)
+let p3 = Number(document.getElementById("p3").value)
+
+let texto = ""
+
+players.forEach((p,i)=>{
+
+let kills = Number(document.getElementById("k"+i).value)
+let pos = Number(document.getElementById("p"+i).value)
+
+let premio = kills * killvalor
+
+if(pos==1) premio+=p1
+if(pos==2) premio+=p2
+if(pos==3) premio+=p3
+
+texto += `${p.nick} → R$ ${premio}<br>`
+
+})
+
+document.getElementById("resultado").innerHTML = texto
+
+}
+
+</script>
+
+</body>
+</html>
